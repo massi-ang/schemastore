@@ -1,0 +1,705 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {
+        "RecipeFormatVersion": "2020-01-25",
+        "ComponentName": "com.exmaple.hello",
+        "ComponentPublisher": "Amazon",
+        "ComponentVersion": "1.0.0",
+        "Manifests": [
+            {
+                "Lifecycle": {
+                    "Run": "echo Hello"
+                }
+            }
+        ]
+    },
+    "examples": [
+        {
+            "RecipeFormatVersion": "2020-01-25",
+            "ComponentName": "com.example.FooService",
+            "ComponentDescription": "Complete recipe for AWS IoT Greengrass components",
+            "ComponentPublisher": "Amazon",
+            "ComponentVersion": "1.0.0",
+            "ComponentConfiguration": {
+                "DefaultConfiguration": {
+                    "TestParam": "TestValue"
+                }
+            },
+            "ComponentDependencies": {
+                "BarService": {
+                    "VersionRequirement": "^1.1.0",
+                    "DependencyType": "SOFT"
+                },
+                "BazService": {
+                    "VersionRequirement": "^2.0.0"
+                }
+            },
+            "Manifests": [
+                {
+                    "Name": "Linux/amd64 version",
+                    "Platform": {
+                        "os": "linux",
+                        "architecture": "amd64",
+                        "key": "gpu"
+                    },
+                    "Lifecycle": {
+                        "Setenv": {
+                            "VAR_A": "Variable A"
+                        },
+                        "Bootstrap": {
+                            "Script": "echo Hello",
+                            "RequiresPrivilege": true,
+                            "Timeout": 120,
+                            "Setenv": {
+                                "VAR_A": "Variable A override"
+                            }
+                        },
+                        "Install": {
+                            "Skipif": "onpath git",
+                            "Script": "sudo apt-get install git",
+                            "RequiresPrivilege": true,
+                            "Timeout": 120,
+                            "Setenv": {
+                                "VAR_A": "Variable A override"
+                            }
+                        },
+                        "Run": {
+                            "Skipif": "onpath git",
+                            "Script": "sudo apt-get install git",
+                            "RequiresPrivilege": true,
+                            "Timeout": 120,
+                            "Setenv": {
+                                "VAR_A": "Variable A override"
+                            }
+                        },
+                        "Startup": {
+                            "Skipif": "onpath git",
+                            "Script": "sudo apt-get install git",
+                            "RequiresPrivilege": true,
+                            "Timeout": 120,
+                            "Setenv": {
+                                "VAR_A": "Variable A override"
+                            }
+                        },
+                        "Shutdown": {
+                            "Skipif": "onpath git",
+                            "Script": "sudo apt-get install git",
+                            "RequiresPrivilege": true,
+                            "Timeout": 120,
+                            "Setenv": {
+                                "VAR_A": "Variable A override"
+                            }
+                        },
+                        "Recover": {
+                            "Skipif": "onpath git",
+                            "Script": "sudo apt-get install git",
+                            "RequiresPrivilege": true,
+                            "Timeout": 120,
+                            "Setenv": {
+                                "VAR_A": "Variable A override"
+                            }
+                        }
+                    },
+                    "Selections": [
+                        "gpu"
+                    ],
+                    "Artifacts": [
+                        {
+                            "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.zip",
+                            "Unarchive": "ZIP"
+                        },
+                        {
+                            "URI": "s3//DOC-EXAMPLE-BUCKET/hello-world2.py",
+                            "Permission": {
+                                "Read": "NONE",
+                                "Exectute": "OWNER"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "Lifecycle": {
+                        "Start": {
+                            "Skipif": "onpath git",
+                            "Script": "sudo apt-get install git"
+                        }
+                    },
+                    "Artifacts": [
+                        {
+                            "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.py"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "required": [
+        "RecipeFormatVersion",
+        "ComponentName",
+        "ComponentPublisher",
+        "ComponentVersion",
+        "Manifests"
+    ],
+    "definitions": {
+        "permissions": {
+            "type": "string",
+            "enum": [
+                "NONE",
+                "OWNER",
+                "ALL"
+            ]
+        },
+        "lifecycle": {
+            "type": "object",
+            "properties": {
+                "Setenv": {
+                    "$ref": "#/definitions/setenv"
+                },
+                "Bootstrap": {
+                    "$ref": "#/definitions/lifecycleElement"
+                },
+                "Install": {
+                    "$ref": "#/definitions/lifecycleElement"
+                },
+                "Startup": {
+                    "$ref": "#/definitions/lifecycleElement"
+                },
+                "Run": {
+                    "$ref": "#/definitions/lifecycleElement"
+                },
+                "Shutdown": {
+                    "$ref": "#/definitions/lifecycleElement"
+                },
+                "Recover": {
+                    "$ref": "#/definitions/lifecycleElement"
+                }
+            }
+        },
+        "lifecycleElement": {
+            "type": "object",
+            "properties": {
+                "Skipif": {
+                    "type": "string",
+                    "description": "The check to determine whether or not to run the script. You can define to check if an executable is on the path or if a file exists. If the output is true, then the AWS IoT Greengrass Core software skips the step.",
+                    "default": "",
+                    "pattern": "(onpath|exists)\\s+.*",
+                    "examples": [
+                        "onpath git"
+                    ]
+                },
+                "Script": {
+                    "type": "string",
+                    "description": "The shell script to execute for this lifecycle",
+                    "default": "",
+                    "examples": [
+                        "sudo apt-get install git"
+                    ]
+                },
+                "RequiresPrivilege": {
+                    "type": "boolean",
+                    "description": "If set to true the script will be execute with root privileges",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "Timeout": {
+                    "type": "integer",
+                    "description": "The maximum amount of time in seconds that the script can run before the AWS IoT Greengrass Core software terminates the process.",
+                    "default": 120,
+                    "examples": [
+                        120
+                    ]
+                },
+                "Setenv": {
+                    "$ref": "#/definitions/setenv"
+                }
+            }
+        },
+        "setenv": {
+            "type": "object",
+            "title": "The Setenv schema",
+            "description": "Set environment variable available to the lifecycle script",
+            "default": {},
+            "examples": [
+                {
+                    "VAR_A": "10"
+                }
+            ],
+            "patternProperties": {
+                "[\\w_-]+": {
+                    "type": "string",
+                    "description": "An environment property",
+                    "default": ""
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "properties": {
+        "RecipeFormatVersion": {
+            "$id": "#/properties/RecipeFormatVersion",
+            "type": "string",
+            "title": "The RecipeFormatVersion schema",
+            "description": "The version for this schema. Must be 2020-01-25",
+            "default": "2020-01-25",
+            "const": "2020-01-25",
+            "examples": [
+                "2020-01-25"
+            ]
+        },
+        "ComponentName": {
+            "$id": "#/properties/ComponentName",
+            "type": "string",
+            "title": "The ComponentName schema",
+            "description": "The name of the compoenent",
+            "default": "",
+            "examples": [
+                "com.example.FooService"
+            ]
+        },
+        "ComponentDescription": {
+            "$id": "#/properties/ComponentDescription",
+            "type": "string",
+            "title": "The ComponentDescription schema",
+            "description": "The description of the component",
+            "default": "",
+            "examples": [
+                "Complete recipe for AWS IoT Greengrass components"
+            ]
+        },
+        "ComponentPublisher": {
+            "$id": "#/properties/ComponentPublisher",
+            "type": "string",
+            "title": "The ComponentPublisher schema",
+            "description": "The publisher of this component.",
+            "default": "",
+            "examples": [
+                "Amazon"
+            ]
+        },
+        "ComponentVersion": {
+            "$id": "#/properties/ComponentVersion",
+            "type": "string",
+            "title": "The ComponentVersion schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "pattern": "\\d+.\\d+.\\d+",
+            "examples": [
+                "1.0.0"
+            ]
+        },
+        "ComponentConfiguration": {
+            "$id": "#/properties/ComponentConfiguration",
+            "type": "object",
+            "title": "The ComponentConfiguration schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "DefaultConfiguration": {
+                        "TestParam": "TestValue"
+                    }
+                }
+            ],
+            "required": [
+                "DefaultConfiguration"
+            ],
+            "properties": {
+                "DefaultConfiguration": {
+                    "type": "object",
+                    "title": "The DefaultConfiguration schema",
+                    "description": "Default configuration paramters for the component",
+                    "default": {},
+                    "examples": [
+                        {
+                            "Param": "Value"
+                        }
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "accessControl": {
+                            "title": "AccessControl schema",
+                            "type": "object",
+                            "properties": {
+                                "aws.greengrass.ipc.pubsub": {
+                                    "examples": [
+                                        {
+                                            "policy_1": {
+                                                "policyDescription": "My policy",
+                                                "operations": [
+                                                    "\"*\""
+                                                ],
+                                                "resources": [
+                                                    "\"*\""
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "patternProperties": {
+                                        "\\w+": {
+                                            "properties": {
+                                                "policyDescription": {
+                                                    "type": "string"
+                                                },
+                                                "operations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "*",
+                                                            "aws.greengrass#PublishToTopic",
+                                                            "aws.greengrass#SubscribeToTopic"
+                                                        ]
+                                                    }
+                                                },
+                                                "resources": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "aws.greengrass.ipc.mqttproxy": {
+                                    "examples": [
+                                        {
+                                            "policy_2": {
+                                                "policyDescription": "My policy",
+                                                "operations": [
+                                                    "\"*\""
+                                                ],
+                                                "resources": [
+                                                    "\"*\""
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "patternProperties": {
+                                        "\\w+": {
+                                            "properties": {
+                                                "policyDescription": {
+                                                    "type": "string"
+                                                },
+                                                "operations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "*",
+                                                            "aws.greengrass#PublishToIoTCore",
+                                                            "aws.greengrass#SubscribeToIoTCore"
+                                                        ]
+                                                    }
+                                                },
+                                                "resources": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "patternProperties": {
+                        "\\w+": {
+                            "anyOf": [
+                                {
+                                    "type": "object"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "ComponentDependencies": {
+            "$id": "#/properties/ComponentDependencies",
+            "type": "object",
+            "title": "The ComponentDependencies schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "BarService": {
+                        "VersionRequirement": "^1.1.0",
+                        "DependencyType": "SOFT"
+                    },
+                    "BazService": {
+                        "VersionRequirement": "^2.0.0"
+                    }
+                }
+            ],
+            "patternProperties": {
+                "\\w+": {
+                    "type": "object",
+                    "title": "The dependency schema",
+                    "description": "A dependency",
+                    "default": {},
+                    "examples": [
+                        {
+                            "VersionRequirement": "^1.1.0",
+                            "DependencyType": "SOFT"
+                        }
+                    ],
+                    "required": [
+                        "VersionRequirement"
+                    ],
+                    "properties": {
+                        "VersionRequirement": {
+                            "$id": "#/properties/ComponentDependencies/properties/BarService/properties/VersionRequirement",
+                            "type": "string",
+                            "title": "The VersionRequirement schema",
+                            "description": "The version of the dependency",
+                            "default": "",
+                            "pattern": "[^>~]?\\d+\\.\\d+\\.\\d+",
+                            "examples": [
+                                "^1.1.0"
+                            ]
+                        },
+                        "DependencyType": {
+                            "$id": "#/properties/ComponentDependencies/properties/BarService/properties/DependencyType",
+                            "type": "string",
+                            "title": "The DependencyType schema",
+                            "description": "The type of this dependency.",
+                            "default": "",
+                            "enum": [
+                                "SOFT",
+                                "HARD"
+                            ],
+                            "examples": [
+                                "SOFT"
+                            ]
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            }
+        },
+        "Manifests": {
+            "$id": "#/properties/Manifests",
+            "type": "array",
+            "title": "The Manifests schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "Name": "Linux/amd64 version",
+                        "Platform": {
+                            "os": "linux",
+                            "architecture": "amd64",
+                            "key": "gpu"
+                        },
+                        "Lifecycle": {
+                            "Setenv": {
+                                "VAR_A": "Variable A"
+                            },
+                            "Bootstrap": {
+                                "Script": "echo Hello",
+                                "RequiresPrivilege": true,
+                                "Timeout": 120,
+                                "Setenv": {
+                                    "VAR_A": "Variable A override"
+                                }
+                            },
+                            "Install": {
+                                "Skipif": "onpath git",
+                                "Script": "sudo apt-get install git",
+                                "RequiresPrivilege": true,
+                                "Timeout": 120,
+                                "Setenv": {
+                                    "VAR_A": "Variable A override"
+                                }
+                            },
+                            "Run": {
+                                "Skipif": "onpath git",
+                                "Script": "sudo apt-get install git",
+                                "RequiresPrivilege": true,
+                                "Timeout": 120,
+                                "Setenv": {
+                                    "VAR_A": "Variable A override"
+                                }
+                            },
+                            "Startup": {
+                                "Skipif": "onpath git",
+                                "Script": "sudo apt-get install git",
+                                "RequiresPrivilege": true,
+                                "Timeout": 120,
+                                "Setenv": {
+                                    "VAR_A": "Variable A override"
+                                }
+                            },
+                            "Shutdown": {
+                                "Skipif": "onpath git",
+                                "Script": "sudo apt-get install git",
+                                "RequiresPrivilege": true,
+                                "Timeout": 120,
+                                "Setenv": {
+                                    "VAR_A": "Variable A override"
+                                }
+                            },
+                            "Recover": {
+                                "Skipif": "onpath git",
+                                "Script": "sudo apt-get install git",
+                                "RequiresPrivilege": true,
+                                "Timeout": 120,
+                                "Setenv": {
+                                    "VAR_A": "Variable A override"
+                                }
+                            }
+                        },
+                        "Selections": [
+                            "gpu"
+                        ],
+                        "Artifacts": [
+                            {
+                                "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.zip",
+                                "Unarchive": "ZIP"
+                            },
+                            {
+                                "URI": "s3//DOC-EXAMPLE-BUCKET/hello-world2.py",
+                                "Permission": {
+                                    "Read": "NONE",
+                                    "Exectute": "OWNER"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "Lifecycle": {
+                            "Start": {
+                                "Skipif": "onpath git",
+                                "Script": "sudo apt-get install git"
+                            }
+                        },
+                        "Artifacts": [
+                            {
+                                "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.py"
+                            }
+                        ]
+                    }
+                ]
+            ],
+            "additionalItems": false,
+            "items": {
+                "$id": "#/properties/Manifests/items",
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string"
+                    },
+                    "Platform": {
+                        "type": "object",
+                        "properties": {
+                            "os": {
+                                "type": "string"
+                            },
+                            "architecture": {
+                                "type": "string",
+                                "enum": [
+                                    "amd64",
+                                    "arm",
+                                    "aarch64",
+                                    "x86"
+                                ]
+                            }
+                        },
+                        "patternProperties": {
+                            "\\w+": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "Lifecycle": {
+                        "$ref": "#/definitions/lifecycle"
+                    },
+                    "Selections": {
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "const": "all"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    },
+                    "Artifacts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "URI"
+                            ],
+                            "properties": {
+                                "URI": {
+                                    "type": "string"
+                                },
+                                "Unarchive": {
+                                    "type": "string",
+                                    "enum": [
+                                        "ZIP",
+                                        "NONE"
+                                    ]
+                                },
+                                "Permission": {
+                                    "type": "object",
+                                    "examples": [
+                                        {
+                                            "Read": "OWNER",
+                                            "Execute": "NONE"
+                                        }
+                                    ],
+                                    "properties": {
+                                        "Read": {
+                                            "$ref": "#/definitions/permissions"
+                                        },
+                                        "Execute": {
+                                            "$ref": "#/definitions/permissions"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Lifecycle": {
+            "type": "object",
+            "oneOf": [
+                {
+                    "patternProperties": {
+                        "\\w+": {
+                            "$ref": "#/definitions/lifecycle"
+                        }
+                    }
+                },
+                {
+                    "$ref": "#/definitions/lifecycle"
+                }
+            ]
+        },
+        "additionalProperties": false
+    },
+    "additionalProperties": false
+}
