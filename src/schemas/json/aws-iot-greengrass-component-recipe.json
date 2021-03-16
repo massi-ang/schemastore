@@ -160,22 +160,64 @@
                     "$ref": "#/definitions/setenv"
                 },
                 "Bootstrap": {
-                    "$ref": "#/definitions/lifecycleElement"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/lifecycleElement"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "Install": {
-                    "$ref": "#/definitions/lifecycleElement"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/lifecycleElement"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "Startup": {
-                    "$ref": "#/definitions/lifecycleElement"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/lifecycleElement"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "Run": {
-                    "$ref": "#/definitions/lifecycleElement"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/lifecycleElement"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "Shutdown": {
-                    "$ref": "#/definitions/lifecycleElement"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/lifecycleElement"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "Recover": {
-                    "$ref": "#/definitions/lifecycleElement"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/lifecycleElement"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 }
             }
         },
@@ -249,7 +291,9 @@
             "default": "2020-01-25",
             "const": "2020-01-25",
             "examples": [
-                "2020-01-25"
+                {
+                    "RecipeFormatVersion": "2020-01-25"
+                }
             ]
         },
         "ComponentName": {
