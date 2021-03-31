@@ -109,11 +109,11 @@
                     ],
                     "Artifacts": [
                         {
-                            "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.zip",
+                            "Uri": "s3://DOC-EXAMPLE-BUCKET/hello_world.zip",
                             "Unarchive": "ZIP"
                         },
                         {
-                            "URI": "s3//DOC-EXAMPLE-BUCKET/hello-world2.py",
+                            "Uri": "s3//DOC-EXAMPLE-BUCKET/hello-world2.py",
                             "Permission": {
                                 "Read": "NONE",
                                 "Exectute": "OWNER"
@@ -130,7 +130,7 @@
                     },
                     "Artifacts": [
                         {
-                            "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.py"
+                            "Uri": "s3://DOC-EXAMPLE-BUCKET/hello_world.py"
                         }
                     ]
                 }
@@ -462,6 +462,9 @@
                                 {
                                     "type": "object"
                                 },
+                                { 
+                                    "type": "array"
+                                },
                                 {
                                     "type": "string"
                                 }
@@ -613,11 +616,11 @@
                         ],
                         "Artifacts": [
                             {
-                                "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.zip",
+                                "Uri": "s3://DOC-EXAMPLE-BUCKET/hello_world.zip",
                                 "Unarchive": "ZIP"
                             },
                             {
-                                "URI": "s3//DOC-EXAMPLE-BUCKET/hello-world2.py",
+                                "Uri": "s3//DOC-EXAMPLE-BUCKET/hello-world2.py",
                                 "Permission": {
                                     "Read": "NONE",
                                     "Exectute": "OWNER"
@@ -634,7 +637,7 @@
                         },
                         "Artifacts": [
                             {
-                                "URI": "s3://DOC-EXAMPLE-BUCKET/hello_world.py"
+                                "Uri": "s3://DOC-EXAMPLE-BUCKET/hello_world.py"
                             }
                         ]
                     }
@@ -692,10 +695,10 @@
                         "items": {
                             "type": "object",
                             "required": [
-                                "URI"
+                                "Uri"
                             ],
                             "properties": {
-                                "URI": {
+                                "Uri": {
                                     "type": "string"
                                 },
                                 "Unarchive": {
