@@ -1,9 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "http://example.com/example.json",
     "type": "object",
-    "title": "The root schema",
-    "description": "The root schema comprises the entire JSON document.",
+    "title": "The AWS IoT Greengrass v2 recipe schema",
     "default": {
         "RecipeFormatVersion": "2020-01-25",
         "ComponentName": "com.exmaple.hello",
@@ -699,7 +697,8 @@
                             ],
                             "properties": {
                                 "Uri": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "pattern": "(s3|docker):.*"
                                 },
                                 "Unarchive": {
                                     "type": "string",
