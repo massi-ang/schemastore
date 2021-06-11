@@ -4,7 +4,7 @@
     "title": "The AWS IoT Greengrass v2 recipe schema",
     "default": {
         "RecipeFormatVersion": "2020-01-25",
-        "ComponentName": "com.exmaple.hello",
+        "ComponentName": "com.example.hello",
         "ComponentPublisher": "Amazon",
         "ComponentVersion": "1.0.0",
         "Manifests": [
@@ -298,7 +298,7 @@
             "$id": "#/properties/ComponentName",
             "type": "string",
             "title": "The ComponentName schema",
-            "description": "The name of the compoenent",
+            "description": "The name of the component",
             "default": "",
             "examples": [
                 "com.example.FooService"
@@ -339,7 +339,7 @@
             "$id": "#/properties/ComponentConfiguration",
             "type": "object",
             "title": "The ComponentConfiguration schema",
-            "description": "An explanation about the purpose of this instance.",
+            "description": "The default configuration for this component\nDefines arbitrary configuration objects and accessControl object",
             "default": {},
             "examples": [
                 {
@@ -355,7 +355,7 @@
                 "DefaultConfiguration": {
                     "type": "object",
                     "title": "The DefaultConfiguration schema",
-                    "description": "Default configuration paramters for the component",
+                    "description": "Default configuration parameters for the component",
                     "default": {},
                     "examples": [
                         {
@@ -366,6 +366,7 @@
                     "properties": {
                         "accessControl": {
                             "title": "AccessControl schema",
+                            "description": "Defines the access control policies for the IPC APIs this component can access",
                             "type": "object",
                             "properties": {
                                 "aws.greengrass.ipc.pubsub": {
@@ -449,6 +450,46 @@
                                             }
                                         }
                                     }
+                                },
+                                "aws.greengrass.SecretManager": {
+                                    "examples": [
+                                        {
+                                            "policy_3": {
+                                                "policyDescription": "My Secret manager policy",
+                                                "operations": [
+                                                    "\"aws.greengrass#GetSecretValue\""
+                                                ],
+                                                "resources": [
+                                                    "\"*\""
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "patternProperties": {
+                                        "\\w+": {
+                                            "properties": {
+                                                "policyDescription": {
+                                                    "type": "string"
+                                                },
+                                                "operations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "*",
+                                                            "aws.greengrass#GetSecretValue"
+                                                        ]
+                                                    }
+                                                },
+                                                "resources": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             },
                             "additionalProperties": false
@@ -477,7 +518,7 @@
             "$id": "#/properties/ComponentDependencies",
             "type": "object",
             "title": "The ComponentDependencies schema",
-            "description": "An explanation about the purpose of this instance.",
+            "description": "Map describing the dependencies for this component",
             "default": {},
             "examples": [
                 {
@@ -494,8 +535,10 @@
                 "\\w+": {
                     "type": "object",
                     "title": "The dependency schema",
-                    "description": "A dependency",
-                    "default": {},
+                    "description": "Dependency configuration for this component",
+                    "default": {
+                        "VersionRequirement": ">0.0.0"
+                    },
                     "examples": [
                         {
                             "VersionRequirement": "^1.1.0",
@@ -540,8 +583,17 @@
             "$id": "#/properties/Manifests",
             "type": "array",
             "title": "The Manifests schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": [],
+            "description": "List of manifests describing the component lifecycle and artifacts for specific platforms",
+            "default": [ { 
+                "Lifecycle": {
+                    "Run": {
+                        "Script": ""
+                    },
+                    "Artifacts": [
+                        { "Uri": "s3://${BUCKET}/"}
+                    ]
+                }
+            }],
             "examples": [
                 [
                     {
