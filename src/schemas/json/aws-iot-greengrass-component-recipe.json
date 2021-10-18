@@ -514,6 +514,26 @@
             },
             "additionalProperties": false
         },
+        "ComponentType": {
+            "$id": "#/properties/ComponentType",
+            "type": "string",
+            "title": "The ComponentType schema",
+            "description": "The type of this component.",
+            "default": "aws.greengrass.generic",
+            "enum": [
+                "aws.greengrass.generic",
+                "aws.greengrass.lambda",
+                "aws.greengrass.plugin",
+                "aws.greengrass.nucleus"
+            ]
+        },
+        "ComponentSource": {
+            "$id": "#/properties/ComponentSource",
+            "type": "string",
+            "title": "The ComponentSource schema",
+            "description": "The lambda arn which is source of this component.",
+            "default": ""
+        },
         "ComponentDependencies": {
             "$id": "#/properties/ComponentDependencies",
             "type": "object",
@@ -775,6 +795,16 @@
                                             "$ref": "#/definitions/permissions"
                                         }
                                     }
+                                },
+                                "Digest": {
+                                    "type": "string",
+                                    "description": "the digest of the compoenent",
+                                    "readOnly": true
+                                },
+                                "Algorithm": {
+                                    "type": "string",
+                                    "description": "The hash algorithm that AWS IoT Greengrass uses to calculate the digest hash of the artifact",
+                                    "readOnly": true
                                 }
                             }
                         }
