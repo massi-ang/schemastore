@@ -728,13 +728,7 @@
                                 "type": "string"
                             },
                             "architecture": {
-                                "type": "string",
-                                "enum": [
-                                    "amd64",
-                                    "arm",
-                                    "aarch64",
-                                    "x86"
-                                ]
+                                "type": "string"
                             }
                         },
                         "patternProperties": {
