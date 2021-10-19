@@ -271,7 +271,7 @@
                 }
             ],
             "patternProperties": {
-                "[\\w_-]+": {
+                "[\\w_-.]+": {
                     "type": "string",
                     "description": "An environment property",
                     "default": ""
@@ -384,7 +384,7 @@
                                         }
                                     ],
                                     "patternProperties": {
-                                        "\\w+": {
+                                        "[.-\\w]+": {
                                             "properties": {
                                                 "policyDescription": {
                                                     "type": "string"
@@ -425,7 +425,7 @@
                                         }
                                     ],
                                     "patternProperties": {
-                                        "\\w+": {
+                                        "[.-\\w]+": {
                                             "properties": {
                                                 "policyDescription": {
                                                     "type": "string"
@@ -466,7 +466,7 @@
                                         }
                                     ],
                                     "patternProperties": {
-                                        "\\w+": {
+                                        "[.-\\w]+": {
                                             "properties": {
                                                 "policyDescription": {
                                                     "type": "string"
@@ -496,7 +496,7 @@
                         }
                     },
                     "patternProperties": {
-                        "\\w+": {
+                        "[\\w/.]+": {
                             "anyOf": [
                                 {
                                     "type": "object"
@@ -532,7 +532,7 @@
                 }
             ],
             "patternProperties": {
-                "\\w+": {
+                "[\\w.-]+": {
                     "type": "object",
                     "title": "The dependency schema",
                     "description": "Dependency configuration for this component",
@@ -590,7 +590,7 @@
                         "Script": ""
                     },
                     "Artifacts": [
-                        { "Uri": "s3://${BUCKET}/"}
+                        { "Uri": "s3://_BUCKET_/"}
                     ]
                 }
             }],
