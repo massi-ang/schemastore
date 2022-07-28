@@ -762,7 +762,7 @@
                                 "Uri"
                             ],
                             "properties": {
-                                "Uri": {
+                                "URI": {
                                     "type": "string",
                                     "pattern": "(s3|docker):.*"
                                 },
