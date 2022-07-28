@@ -1,7 +1,5 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "swc configuration schema",
-  "description": "Schema for the swc configuration file",
   "anyOf": [
     {
       "type": "array",
@@ -158,10 +156,7 @@
           "properties": {
             "mode": {
               "type": "string",
-              "enum": [
-                "usage",
-                "entry"
-              ]
+              "enum": ["usage", "entry"]
             },
             "debug": {
               "type": "boolean"
@@ -254,12 +249,7 @@
           "properties": {
             "type": {
               "type": "string",
-              "enum": [
-                "commonjs",
-                "amd",
-                "umd",
-                "es6"
-              ]
+              "enum": ["commonjs", "amd", "umd", "es6"]
             },
             "strict": {
               "type": "boolean",
@@ -300,10 +290,11 @@
               "$ref": "#/definitions/stringStringMap"
             }
           },
-          "required": [
-            "type"
-          ],
+          "required": ["type"],
           "additionalProperties": false
+        },
+        "$schema": {
+          "type": "string"
         },
         "jsc": {
           "type": "object",
@@ -316,9 +307,7 @@
                 {
                   "properties": {
                     "syntax": {
-                      "enum": [
-                        "ecmascript"
-                      ]
+                      "enum": ["ecmascript"]
                     },
                     "jsx": {
                       "type": "boolean",
@@ -381,9 +370,7 @@
                 {
                   "properties": {
                     "syntax": {
-                      "enum": [
-                        "typescript"
-                      ]
+                      "enum": ["typescript"]
                     },
                     "tsx": {
                       "type": "boolean",
@@ -418,6 +405,9 @@
                 "react": {
                   "type": "object",
                   "properties": {
+                    "development": {
+                      "type": "boolean"
+                    },
                     "pragma": {
                       "type": "string",
                       "default": "React.createElement"
@@ -426,12 +416,18 @@
                       "type": "string",
                       "default": "React.Fragment"
                     },
+                    "refresh": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "runtime": {
+                      "type": "string",
+                      "enum": ["automatic", "classic"],
+                      "default": "classic"
+                    },
                     "throwIfNamespace": {
                       "type": "boolean",
                       "default": true
-                    },
-                    "development": {
-                      "type": "boolean"
                     },
                     "useBuiltins": {
                       "type": "boolean"
@@ -517,12 +513,24 @@
                 "es2017",
                 "es2018",
                 "es2019",
-                "es2020"
+                "es2020",
+                "es2021",
+                "es2022"
               ]
             },
             "loose": {
               "type": "boolean",
               "description": "If true, swc generates more efficient code"
+            },
+            "paths": {
+              "type": "object",
+              "$comment": "Requires swc@1.2.62 and jsc.baseUrl",
+              "description": "Should reflect \"paths\" property in project's tsconfig.json . See https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping"
+            },
+            "baseUrl": {
+              "type": "string",
+              "$comment": "Requires swc@1.2.62",
+              "description": "Should reflect \"baseUrl\" property in project's tsconfig.json . See https://www.typescriptlang.org/docs/handbook/module-resolution.html#base-url"
             }
           },
           "additionalProperties": false
@@ -583,11 +591,7 @@
           ]
         },
         "rootMode": {
-          "enum": [
-            "root",
-            "upward",
-            "upward-optional"
-          ]
+          "enum": ["root", "upward", "upward-optional"]
         },
         "inputSourceMap": {
           "anyOf": [
@@ -612,5 +616,7 @@
       },
       "additionalProperties": false
     }
-  }
+  },
+  "description": "Schema for the swc configuration file",
+  "title": "swc configuration schema"
 }

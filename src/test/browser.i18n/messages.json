@@ -1,0 +1,15 @@
+{
+  "credits": {
+    "message": "Credits: $AUTHOR$",
+    "placeholders": {
+      "author": {
+        "content": "Van Gogh",
+        "example": "John Doe"
+      }
+    }
+  },
+  "helloWorld": {
+    "message": "Hello World!",
+    "description": "Typical application first text"
+  }
+}
