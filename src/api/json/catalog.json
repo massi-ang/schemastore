@@ -3835,12 +3835,13 @@
       "url": "https://json.schemastore.org/petstore-v1.0.json",
       "versions": {
         "1.0": "https://json.schemastore.org/petstore-v1.0.json"
-      },
-      {
-        "name": "aws-iot-greengrass-component-recipe.json",
-        "description": "AWS IoT Greengrass recipe schema",
-        "fileMatch": ["*recipe.json"],
-        "url": "https://json.schemastore.org/aws-iot-greengrass-component-recipe.json"
+      }
+    },
+    {
+      "name": "aws-iot-greengrass-component-recipe.json",
+      "description": "AWS IoT Greengrass recipe schema",
+      "fileMatch": ["*recipe.json"],
+      "url": "https://json.schemastore.org/aws-iot-greengrass-component-recipe.json"
     }
   ],
   "version": 1
