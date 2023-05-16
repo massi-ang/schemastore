@@ -677,7 +677,7 @@
                                 {
                                     "type": "object"
                                 },
-                                { 
+                                {
                                     "type": "array"
                                 },
                                 {
@@ -780,7 +780,7 @@
             "type": "array",
             "title": "The Manifests schema",
             "description": "List of manifests describing the component lifecycle and artifacts for specific platforms",
-            "default": [ { 
+            "default": [ {
                 "Lifecycle": {
                     "Run": {
                         "Script": ""
