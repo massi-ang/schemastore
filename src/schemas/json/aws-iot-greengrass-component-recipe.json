@@ -413,7 +413,7 @@
                                 "aws.greengrass.ipc.lifecycle": {
                                     "examples": [
                                         {
-                                            "policy_1": {
+                                            "lifecycle_1": {
                                                 "policyDescription": "My policy",
                                                 "operations": [
                                                     "\"*\""
