@@ -410,6 +410,182 @@
                                         }
                                     }
                                 },
+                                "aws.greengrass.ipc.lifecycle": {
+                                    "examples": [
+                                        {
+                                            "policy_1": {
+                                                "policyDescription": "My policy",
+                                                "operations": [
+                                                    "\"*\""
+                                                ],
+                                                "resources": [
+                                                    "\"*\""
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "patternProperties": {
+                                        "[.-\\w]+": {
+                                            "properties": {
+                                                "policyDescription": {
+                                                    "type": "string"
+                                                },
+                                                "operations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "*",
+                                                            "aws.greengrass#PauseComponent",
+                                                            "aws.greengrass#ResumeComponent"
+                                                        ]
+                                                    }
+                                                },
+                                                "resources": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "aws.greengrass.ShadowManager": {
+                                    "examples": [
+                                        {
+                                            "policy_1": {
+                                                "policyDescription": "My policy",
+                                                "operations": [
+                                                    "\"*\""
+                                                ],
+                                                "resources": [
+                                                    "\"*\""
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "patternProperties": {
+                                        "[.-\\w]+": {
+                                            "properties": {
+                                                "policyDescription": {
+                                                    "type": "string"
+                                                },
+                                                "operations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "*",
+                                                            "aws.greengrass#GetThingShadow",
+                                                            "aws.greengrass#UpdateThingShadow",
+                                                            "aws.greengrass#DeleteThingShadow",
+                                                            "aws.greengrass#ListNamedShadowsForThing"
+
+                                                        ]
+                                                    }
+                                                },
+                                                "resources": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "aws.greengrass.Cli": {
+                                    "examples": [
+                                        {
+                                            "policy_1": {
+                                                "policyDescription": "My policy",
+                                                "operations": [
+                                                    "\"*\""
+                                                ],
+                                                "resources": [
+                                                    "\"*\""
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "patternProperties": {
+                                        "[.-\\w]+": {
+                                            "properties": {
+                                                "policyDescription": {
+                                                    "type": "string"
+                                                },
+                                                "operations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "*",
+                                                            "aws.greengrass#CreateLocalDeployment",
+                                                            "aws.greengrass#ListLocalDeployments",
+                                                            "aws.greengrass#GetLocalDeploymentStatus",
+                                                            "aws.greengrass#ListComponents",
+                                                            "aws.greengrass#GetComponentDetails",
+                                                            "aws.greengrass#RestartComponent",
+                                                            "aws.greengrass#StopComponent",
+                                                            "aws.greengrass#CreateDebugPassword"
+                                                        ]
+                                                    }
+                                                },
+                                                "resources": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "aws.greengrass.clientdevices.Auth": {
+                                    "description": "Use the client device auth IPC service to develop a custom local broker component where local IoT devices, such as client devices, can connect. [Authenticate and authorize client devices](https://docs.aws.amazon.com/greengrass/v2/developerguide/ipc-client-device-auth.html)",
+                                    "examples": [
+                                        {
+                                            "policy_1": {
+                                                "policyDescription": "My policy",
+                                                "operations": [
+                                                    "\"*\""
+                                                ],
+                                                "resources": [
+                                                    "\"*\""
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    "patternProperties": {
+                                        "[.-\\w]+": {
+                                            "properties": {
+                                                "policyDescription": {
+                                                    "type": "string"
+                                                },
+                                                "operations": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "*",
+                                                            "aws.greengrass#VerifyClientDeviceIdentity",
+                                                            "aws.greengrass#GetClientDeviceAuthToken",
+                                                            "aws.greengrass#AuthorizeClientDeviceAction",
+                                                            "aws.greengrass#SubscribeToCertificateUpdates"
+                                                        ]
+                                                    }
+                                                },
+                                                "resources": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
                                 "aws.greengrass.ipc.mqttproxy": {
                                     "examples": [
                                         {
