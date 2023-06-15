@@ -6,8 +6,10 @@
     "appsettings.json",
     "appveyor.json",
     "asmdef.json",
-    "azure-deviceupdate-import-manifest-4.0.json",
     "azure-deviceupdate-update-manifest-4.json",
+    "azure-deviceupdate-update-manifest-5.json",
+    "azure-deviceupdate-import-manifest-4.0.json",
+    "azure-deviceupdate-import-manifest-5.0.json",
     "azure-iot-edge-deployment-1.0.json",
     "azure-iot-edge-deployment-2.0.json",
     "azure-iot-edge-deployment-template-1.0.json",
@@ -29,6 +31,8 @@
     "bundleconfig.json",
     "bxci.schema-1.0.json",
     "bxci.schema-1.0.1.json",
+    "bxci.schema-2.0.0.json",
+    "bxci.schema-2.x.json",
     "catalog-info.json",
     "chrome-manifest.json",
     "chutzpah.json",
@@ -53,7 +57,6 @@
     "debugsettings.json",
     "dependabot-2.0.json",
     "dependabot.json",
-    "detekt.json",
     "devinit.schema-1.0.json",
     "devinit.schema-2.0.json",
     "devinit.schema-3.0.json",
@@ -70,9 +73,12 @@
     "expo-40.0.0.json",
     "expo-41.0.0.json",
     "expo-42.0.0.json",
+    "expo-46.0.0.json",
     "feed-1.json",
     "feed.json",
-    "foundryvtt-manifest.json",
+    "foundryvtt-module-manifest.json",
+    "foundryvtt-system-manifest.json",
+    "foundryvtt-world-manifest.json",
     "function.json",
     "geojson.json",
     "github-action.json",
@@ -89,8 +95,8 @@
     "helmfile.json",
     "hemtt-0.6.2.json",
     "host.json",
+    "hws-config.json",
     "install.json",
-    "io-package.json",
     "jasonette.json",
     "jovo-language-model.json",
     "jsconfig.json",
@@ -100,8 +106,7 @@
     "json-api-1.0.json",
     "json-patch.json",
     "jsone.json",
-    "ksp-avc.json",
-    "ksp-ckan.json",
+    "kong_json_schema.json",
     "kustomization.json",
     "label-commenter-config.json",
     "launchsettings.json",
@@ -118,7 +123,6 @@
     "minecraft-recipe.json",
     "minecraft-template-pool.json",
     "mtad.json",
-    "neoload.json",
     "nest-cli.json",
     "netlify.json",
     "nightwatch.json",
@@ -133,6 +137,7 @@
     "package.json",
     "package.manifest-8.0.0.json",
     "package.manifest.json",
+    "paper-plugin.json",
     "pattern.json",
     "phraseapp.json",
     "plagiarize-0.0.json",
@@ -168,7 +173,6 @@
     "staticwebapp.config.json",
     "stylelintrc.json",
     "stylintrc.json",
-    "taskfile.json",
     "taurus.json",
     "template.json",
     "templatesources.json",
@@ -178,8 +182,11 @@
     "tsoa.json",
     "typings.json",
     "typingsrc.json",
+    "typo3.json",
     "ubuntu-server-autoinstall.json",
     "up.json",
+    "utam-page-object.json",
+    "utam-page-object-1.5.0.json",
     "vega-lite.json",
     "vs-nesting.json",
     "vsext.json",
@@ -193,18 +200,29 @@
     "workflows.json",
     "xs-app.json",
     "yamllint.json",
-    "deployed.json"
+    "deployed.json",
+    "jfrog-pipelines.json"
   ],
   "fileMatchConflict": [
+    "---> Name conflicts must be avoided. Do not add additional items here. <---",
     "plugin.yml",
     ".jsbeautifyrc",
     "info.json",
     "manifest.json",
     "*.cryproj"
   ],
+  "highSchemaVersion": [
+    "---> JSON schema 2019-09 and 2020-12 are not well supported by many IDEs and should not be used <---",
+    "jsone.json",
+    "license-report-config.json",
+    "openweather.current.json",
+    "openweather.roadrisk.json",
+    "specif-1.1.json"
+  ],
   "missingcatalogurl": [
     "---> below this line are schema, that are included from other schema<---",
     "azure-deviceupdate-manifest-definitions-4.0.json",
+    "azure-deviceupdate-manifest-definitions-5.0.json",
     "compilerdefaults.json",
     "kubernetes-definitions.json",
     "web-manifest.json",
@@ -219,15 +237,9 @@
     "lsdlschema-3.2.json",
     "lsdlschema-3.3.json",
     "lsdlschema-3.4.json",
-    "---> below this line are schema, that link the URL to external site but still have the schema.json on this site <---",
-    "ksp-ckan.json",
-    "ksp-avc.json",
-    "neoload.json",
-    "block.json",
-    "theme-v1.json",
     "---> below this line are schema, that is used by tv4 validator <---",
     "schema-draft-v4.json",
-    "---> below this line are schema, that have no URL in schema. Do not know yet what to do with it.<---",
+    "---> below this line are standalone schemas, which do not have a URL in the catalog. This is wrong. Should these schemas be removed?<---",
     "content-security-policy-report-2.json",
     "install.json",
     "jasonette.json",
@@ -244,8 +256,7 @@
     "sarif-external-property-file.json",
     "sarif.json",
     "stylintrc.json",
-    "toolinfo.1.1.0.json",
-    "renovate.json"
+    "toolinfo.1.1.0.json"
   ],
   "options": [
     {
@@ -270,6 +281,16 @@
       }
     },
     {
+      "apple-app-site-association.json": {
+        "externalSchema": ["base-04.json"]
+      }
+    },
+    {
+      "azure-deviceupdate-import-manifest-5.0.json": {
+        "externalSchema": ["azure-deviceupdate-manifest-definitions-5.0.json"]
+      }
+    },
+    {
       "azure-deviceupdate-import-manifest-4.0.json": {
         "externalSchema": ["azure-deviceupdate-manifest-definitions-4.0.json"]
       }
@@ -277,6 +298,11 @@
     {
       "azure-deviceupdate-update-manifest-4.json": {
         "externalSchema": ["azure-deviceupdate-manifest-definitions-4.0.json"]
+      }
+    },
+    {
+      "azure-deviceupdate-update-manifest-5.json": {
+        "externalSchema": ["azure-deviceupdate-manifest-definitions-5.0.json"]
       }
     },
     {
@@ -326,6 +352,11 @@
     {
       "azure-iot-edgehub-deployment-1.2.json": {
         "unknownKeywords": ["examples", "contentMediaType"]
+      }
+    },
+    {
+      "anywork-ac-1.0.json": {
+        "externalSchema": ["base.json"]
       }
     },
     {
@@ -448,6 +479,29 @@
       }
     },
     {
+      "foundryvtt-base-package-manifest.json": {
+        "unknownKeywords": ["deprecationMessage"]
+      }
+    },
+    {
+      "foundryvtt-module-manifest.json": {
+        "externalSchema": ["foundryvtt-base-package-manifest.json"],
+        "unknownKeywords": ["deprecationMessage"]
+      }
+    },
+    {
+      "foundryvtt-system-manifest.json": {
+        "externalSchema": ["foundryvtt-base-package-manifest.json"],
+        "unknownKeywords": ["deprecationMessage"]
+      }
+    },
+    {
+      "foundryvtt-world-manifest.json": {
+        "externalSchema": ["foundryvtt-base-package-manifest.json"],
+        "unknownKeywords": ["deprecationMessage"]
+      }
+    },
+    {
       "grunt-jshint-task.json": {
         "externalSchema": ["jshintrc.json", "grunt-task.json"]
       }
@@ -503,21 +557,14 @@
       }
     },
     {
-      "neoload.json": {
-        "unknownKeywords": [
-          "fileMatch",
-          "xrequired",
-          "x-d7nosupport-additionalProperties",
-          "threshold",
-          "value",
-          "xcomments"
-        ]
-      }
-    },
-    {
       "ninjs-2.0.json": {
         "unknownKeywords": ["name"],
         "externalSchema": ["geojson.json"]
+      }
+    },
+    {
+      "prisma.json": {
+        "externalSchema": ["base.json"]
       }
     },
     {
@@ -531,6 +578,7 @@
           "eslintrc.json",
           "prettierrc.json",
           "ava.json",
+          "npm-badges.json",
           "stylelintrc.json",
           "semantic-release.json",
           "jscpd.json"
@@ -650,12 +698,19 @@
     },
     {
       "pyproject.json": {
-        "unknownKeywords": ["x-taplo", "x-taplo-info"]
+        "externalSchema": ["ruff.json"],
+        "unknownKeywords": ["x-taplo", "x-taplo-info"],
+        "unknownFormat": ["uint", "int"]
       }
     },
     {
       "replit.json": {
         "unknownKeywords": ["x-taplo", "x-taplo-info"]
+      }
+    },
+    {
+      "ruff.json": {
+        "unknownFormat": ["uint", "int"]
       }
     },
     {
@@ -667,15 +722,65 @@
       "rust-toolchain.json": {
         "unknownKeywords": ["x-taplo", "x-taplo-info"]
       }
+    },
+    {
+      "cheatsheets.json": {
+        "externalSchema": ["base.json"]
+      }
+    },
+    {
+      "hammerkit.json": {
+        "externalSchema": ["base.json"]
+      }
+    },
+    {
+      "clasp.json": {
+        "externalSchema": ["base-04.json"]
+      }
+    },
+    {
+      "clangd.json": {
+        "externalSchema": ["base.json"]
+      }
+    },
+    {
+      "uproject.json": {
+        "unknownKeywords": ["markdownDescription"]
+      }
+    },
+    {
+      "jekyll.json": {
+        "externalSchema": ["base.json"]
+      }
+    },
+    {
+      "minecraft-advancement.json": {
+        "externalSchema": ["base.json"]
+      }
+    },
+    {
+      "rancher-fleet.json": {
+        "externalSchema": ["base.json"]
+      }
     }
   ],
   "skiptest": [
+    "---> Add JSON schema to skiptest[] to skip the whole validation process <---",
     "---> ninjs-1.0.json use 'draft-03' is not supported by validator<---",
     "ninjs-1.0.json",
-    "---> below this line are schema that $ref external urls <---",
+    "---> below this line are the 'empty' schemas that should not be validated and also redirect to an external schema via a single $ref. <---",
     "block.json",
+    "haxelib.json",
+    "ksp-avc.json",
+    "ksp-ckan.json",
     "theme-v1.json",
-    "markdownlint.json"
+    "renovate.json",
+    "markdownlint.json",
+    "taskfile.json",
+    "neoload.json",
+    "xunit-2.2.json",
+    "xunit-2.3.json",
+    "xunit.runner.schema.json"
   ],
   "tv4ExternalRef": {
     "http://json-schema.org/draft-04/schema#": "schema-draft-v4.json",
@@ -707,7 +812,6 @@
     "lsdlschema.json",
     "mimetypes.json",
     "nodemon.json",
-    "renovate.json",
     "sarif-2.0.0-csd.2.beta.2018-10-10.json",
     "sarif-2.0.0.json",
     "sarif-2.1.0-rtm.0.json",

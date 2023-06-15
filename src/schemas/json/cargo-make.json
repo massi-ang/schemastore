@@ -502,6 +502,30 @@
             "description": "File path",
             "type": "string"
           }
+        },
+        "files_modified": {
+          "title": "Lists input and output globs",
+          "description": "If any input file is newer than all output files, the condition is met. Environment substitution is supported so you can define relative paths",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "input": {
+              "description": "List of input globs",
+              "type": "array",
+              "items": {
+                "description": "glob",
+                "type": "string"
+              }
+            },
+            "output": {
+              "description": "List of output globs",
+              "type": "array",
+              "items": {
+                "description": "glob",
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
@@ -794,6 +818,11 @@
                 "version": {
                   "description": "Exact version of installed crate",
                   "$ref": "#/definitions/semver"
+                },
+                "install_command": {
+                  "title": "Install Command",
+                  "description": "The alternative cargo install command to install the crate",
+                  "type": "string"
                 }
               }
             },
@@ -1204,11 +1233,41 @@
       "properties": {
         "skip_core_tasks": {
           "description": "If true, the default core tasks will not be loaded",
-          "default": true,
+          "default": false,
           "type": "boolean",
           "x-taplo": {
             "links": {
               "key": "https://sagiegurari.github.io/cargo-make/#usage-predefined-flows-disable"
+            }
+          }
+        },
+        "skip_git_env_info": {
+          "description": "If true, the Git related environment variables will not be loaded",
+          "default": false,
+          "type": "boolean",
+          "x-taplo": {
+            "links": {
+              "key": "https://github.com/sagiegurari/cargo-make#performance-tuning"
+            }
+          }
+        },
+        "skip_rust_env_info": {
+          "description": "If true, the rust related environment variables will not be loaded",
+          "default": false,
+          "type": "boolean",
+          "x-taplo": {
+            "links": {
+              "key": "https://github.com/sagiegurari/cargo-make#performance-tuning"
+            }
+          }
+        },
+        "skip_crate_env_info": {
+          "description": "If true, the current crate related environment variables will not be loaded",
+          "default": false,
+          "type": "boolean",
+          "x-taplo": {
+            "links": {
+              "key": "https://github.com/sagiegurari/cargo-make#performance-tuning"
             }
           }
         },
@@ -1321,7 +1380,7 @@
         },
         "default_to_workspace": {
           "description": "The default value for the `workspace` value of tasks in this makefile",
-          "default": false,
+          "default": true,
           "type": "boolean",
           "x-taplo": {
             "links": {

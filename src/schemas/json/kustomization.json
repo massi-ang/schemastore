@@ -151,6 +151,24 @@
         },
         "includeCRDs": {
           "type": "boolean"
+        },
+        "additionalValuesFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skipTests": {
+          "type": "boolean"
+        },
+        "apiVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameTemplate": {
+          "type": "string"
         }
       },
       "additionalProperties": false,
@@ -447,6 +465,10 @@
         },
         "includeSelectors": {
           "description": "IncludeSelectors inidicates should transformer include the fieldSpecs for selectors",
+          "type": "boolean"
+        },
+        "includeTemplates": {
+          "description": "IncludeTemplates inidicates should transformer include the template labels",
           "type": "boolean"
         },
         "fields": {

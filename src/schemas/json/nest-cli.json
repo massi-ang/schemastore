@@ -88,10 +88,22 @@
       "properties": {
         "spec": {
           "$ref": "#/definitions/GenerateSpecOptions"
+        },
+        "flat": {
+          "$ref": "#/definitions/GenerateFlatOptions"
+        },
+        "baseDir": {
+          "$ref": "#/definitions/GenerateBaseDirOptions"
         }
       },
       "default": {},
       "additionalProperties": false
+    },
+    "GenerateFlatOptions": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, all generate commands will generate a flat structure",
+      "$comment": "https://docs.nestjs.com/cli/monorepo#global-generate-options"
     },
     "GenerateSpecOptions": {
       "type": ["boolean", "object"],
@@ -244,6 +256,11 @@
         }
       },
       "additionalProperties": false
+    },
+    "GenerateBaseDirOptions": {
+      "type": "string",
+      "default": "",
+      "description": "Base directory"
     },
     "ProjectConfiguration": {
       "type": "object",

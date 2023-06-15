@@ -67,6 +67,7 @@
         "npm",
         "nuget",
         "pip",
+        "pub",
         "terraform"
       ]
     },
@@ -259,6 +260,7 @@
                 "docker-registry",
                 "git",
                 "hex-organization",
+                "hex-repository",
                 "maven-repository",
                 "npm-registry",
                 "nuget-feed",
@@ -294,6 +296,18 @@
             "organization": {
               "description": "",
               "type": "string"
+            },
+            "repo": {
+              "description": "",
+              "type": "string"
+            },
+            "auth-key": {
+              "description": "",
+              "type": "string"
+            },
+            "public-key-fingerprint": {
+              "description": "",
+              "type": "string"
             }
           },
           "required": ["type"]
@@ -313,6 +327,9 @@
           "default": 2
         }
       ]
+    },
+    "enable-beta-ecosystems": {
+      "type": "boolean"
     },
     "updates": {
       "type": "array",

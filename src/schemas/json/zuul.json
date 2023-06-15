@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "JobEntry": {
       "additionalProperties": false,
@@ -256,6 +256,11 @@
           "default": true,
           "title": "Voting",
           "type": "boolean"
+        },
+        "workspace-scheme": {
+          "title": "Workspace Scheme",
+          "enum": ["flat", "golang", "unique"],
+          "type": "string"
         }
       },
       "required": ["name"],
@@ -357,6 +362,10 @@
         "promote": {
           "$ref": "#/definitions/PipelineModel"
         },
+        "queue": {
+          "title": "Queue",
+          "type": "string"
+        },
         "release": {
           "$ref": "#/definitions/PipelineModel"
         },
@@ -418,6 +427,10 @@
         },
         "promote": {
           "$ref": "#/definitions/PipelineModel"
+        },
+        "queue": {
+          "title": "Queue",
+          "type": "string"
         },
         "release": {
           "$ref": "#/definitions/PipelineModel"
