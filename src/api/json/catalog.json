@@ -4986,6 +4986,12 @@
       "description": "auto api case schema",
       "fileMatch": ["**/test_data/*.yml"],
       "url": "https://json.schemastore.org/case_schema.json"
+    },
+    {
+      "name": "aws-iot-greengrass-component-recipe.json",
+      "description": "AWS IoT Greengrass recipe schema",
+      "fileMatch": ["*recipe.json"],
+      "url": "https://json.schemastore.org/aws-iot-greengrass-component-recipe.json"
     }
   ],
   "version": 1
